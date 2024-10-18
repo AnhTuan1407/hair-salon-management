@@ -1,0 +1,53 @@
+<div class="container mt-4">
+    <form method="POST" action="/api/staff/create">
+        <div class="mb-3">
+            <label for="name" class="form-label">Tên nhân viên</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email">
+        </div>
+
+        <div class="mb-3">
+            <label for="gender" class="form-label">Giới tính</label>
+            <select id="gender" name="gender" class="form-control">
+                <option value="" disabled selected>Chọn giới tính</option>
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+                <option value="Khác">Khác</option>
+            </select>
+        </div>
+
+
+        <div class="mb-3">
+            <label for="address" class="form-label">Địa chỉ</label>
+            <input type="text" class="form-control" id="address" name="address">
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">Số điện thoại</label>
+            <input type="text" class="form-control" id="phone" name="phone">
+        </div>
+
+        <div class="mb-3">
+            <label for="role" class="form-label">Vai trò</label>
+            <input type="text" class="form-control" id="role" name="role">
+        </div>
+
+        <div class="mb-3">
+            <label for="accountId" class="form-label">Tài khoản</label>
+            <input type="text" class="form-control" id="accountId" name="accountId">
+        </div>
+
+        <div class="mb-3">
+            <label for="locationId" class="form-label">Cơ sở</label>
+            <input type="text" class="form-control" id="locationId" name="locationId">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Thêm mới nhân viên</button>
+    </form>
+
+
+</div>

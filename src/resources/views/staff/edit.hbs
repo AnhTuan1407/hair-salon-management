@@ -1,0 +1,58 @@
+<div class="container mt-4">
+    {{#with staff}}
+    <form method="POST" action="/api/staff/edit/{{STAFF_ID}}?_method=PUT">
+        <div class="mb-3">
+            <label for="name" class="form-label">Tên nhân viên</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{NAME}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{EMAIL}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="gender" class="form-label">Giới tính</label>
+            <select id="gender" name="gender" class="form-control">
+                <option value="" disabled selected>Chọn giới tính</option>
+                <option value="Nam" {{#if (eq GENDER "Nam" )}}selected{{/if}}>Nam</option>
+                <option value="Nữ" {{#if (eq GENDER "Nữ" )}}selected{{/if}}>Nữ</option>
+                <option value="Khác" {{#if (eq GENDER "Khác" )}}selected{{/if}}>Khác</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="address" class="form-label">Địa chỉ</label>
+            <input type="text" class="form-control" id="address" name="address" value="{{ADDRESS}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">Số điện thoại</label>
+            <input type="text" class="form-control" id="phone" name="phone" value="{{PHONE}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="role" class="form-label">Vai trò</label>
+            <input type="text" class="form-control" id="role" name="role" value="{{ROLE}}">
+        </div>
+
+        <div class="mb-3">
+            <input type="text" class="form-control" id="accountId" name="accountId" value="{{ACCOUNT_ID}}" hidden>
+        </div>
+
+        <div class="mb-3">
+            <label for="locationId" class="form-label">Cơ sở</label>
+            <select id="locationId" name="locationId" class="form-control">
+                <option value="" disabled>Chọn cơ sở</option>
+                {{#each ../location}} <!-- Sử dụng ../ để thoát khỏi scope hiện tại -->
+                <option value="{{this.dataValues.LOCATION_ID}}" {{#if (eq ../LOCATION_ID
+                    this.dataValues.LOCATION_ID)}}selected{{/if}}>
+                    {{this.dataValues.NAME}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Sửa</button>
+        {{/with}}
+    </form>
+</div>

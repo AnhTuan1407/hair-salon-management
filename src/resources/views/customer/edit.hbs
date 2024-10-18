@@ -1,0 +1,51 @@
+<div class="container mt-4">
+    {{#with customer}}
+    <form method="POST" action="/api/customers/edit/{{CUSTOMER_ID}}?_method=PUT">
+        <div class="mb-3">
+            <label for="name" class="form-label">Họ và tên <span class="text-danger">(*)</span></label>
+            <input type="text" class="form-control" id="name" name="name" value="{{NAME}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email <span class="text-danger">(*)</span></label>
+            <input type="email" class="form-control" id="email" name="email" value="{{EMAIL}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="gender" class="form-label">Giới tính</label>
+            <select id="gender" name="gender" class="form-control">
+                <option value="" disabled selected>Chọn giới tính</option>
+                <option value="Nam" {{#if (eq GENDER "Nam" )}}selected{{/if}}>Nam</option>
+                <option value="Nữ" {{#if (eq GENDER "Nữ" )}}selected{{/if}}>Nữ</option>
+                <option value="Khác" {{#if (eq GENDER "Khác" )}}selected{{/if}}>Khác</option>
+            </select>
+        </div>
+
+
+        <div class="mb-3">
+            <label for="address" class="form-label">Địa chỉ <span class="text-danger">(*)</span></label>
+            <input type="text" class="form-control" id="address" name="address" value="{{ADDRESS}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">Số điện thoại <span class="text-danger">(*)</span></label>
+            <input type="text" class="form-control" id="phone" name="phone" value="{{PHONE}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="dateOfBirth" class="form-label">Ngày sinh <span class="text-danger">(*)</span></label>
+            <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" value="{{DATE_OF_BIRTH}}">
+        </div>
+
+        <div class="mb-3">
+            <input type="text" class="form-control" id="points" name="points" value="{{POINTS}}" disabled hidden>
+        </div>
+
+        <div class="mb-3">
+            <input type="text" class="form-control" id="accountId" name="accountId" value="{{ACCOUNT_ID}}" disabled hidden>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Sửa</button>
+    </form>
+    {{/with}}
+</div>

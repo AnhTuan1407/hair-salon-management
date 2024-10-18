@@ -1,0 +1,43 @@
+<div class="container mt-4">
+    <form method="POST" action="/api/customers/create">
+        <div class="mb-3">
+            <label for="name" class="form-label">Họ và tên <span class="text-danger">(*)</span></label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email <span class="text-danger">(*)</span></label>
+            <input type="email" class="form-control" id="email" name="email">
+        </div>
+
+        <div class="mb-3">
+            <label for="gender" class="form-label">Giới tính <span class="text-danger">(*)</span></label>
+            <select id="gender" name="gender" class="form-control">
+                <option value="" disabled selected>Chọn giới tính</option>
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+                <option value="Khác">Khác</option>
+            </select>
+        </div>
+
+
+        <div class="mb-3">
+            <label for="address" class="form-label">Địa chỉ <span class="text-danger">(*)</span></label>
+            <input type="text" class="form-control" id="address" name="address">
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">Số điện thoại <span class="text-danger">(*)</span></label>
+            <input type="text" class="form-control" id="phone" name="phone">
+        </div>
+
+        <div class="mb-3">
+            <label for="dateOfBirth" class="form-label">Ngày sinh <span class="text-danger">(*)</span></label>
+            <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Thêm khách hàng</button>
+    </form>
+
+
+</div>

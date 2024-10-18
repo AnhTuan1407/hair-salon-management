@@ -1,0 +1,47 @@
+<div class="container mt-4">
+    {{#with staff}}
+    <div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Tên nhân viên</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{NAME}}" disabled>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{EMAIL}}" disabled>
+        </div>
+
+        <div class="mb-3">
+            <label for="gender" class="form-label">Giới tính</label>
+            <input type="text" class="form-control" id="email" name="email" value="{{GENDER}}" disabled>
+        </div>
+
+        <div class="mb-3">
+            <label for="address" class="form-label">Địa chỉ</label>
+            <input type="text" class="form-control" id="address" name="address" value="{{ADDRESS}}" disabled>
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">Số điện thoại</label>
+            <input type="text" class="form-control" id="phone" name="phone" value="{{PHONE}}" disabled>
+        </div>
+
+        <div class="mb-3">
+            <label for="role" class="form-label">Vai trò</label>
+            <input type="text" class="form-control" id="role" name="role" value="{{ROLE}}" disabled>
+        </div>
+
+        <div class="mb-3">
+            <label for="accountId" class="form-label">Tài khoản</label>
+            <input type="text" class="form-control" id="accountId" name="accountId" value="{{ACCOUNT_ID}}" disabled>
+        </div>
+
+        <div class="mb-3">
+            <label for="locationId" class="form-label">Cơ sở</label>
+            <input type="text" class="form-control" id="locationId" name="locationId" value="{{LOCATION_ID}}" disabled>
+        </div>
+
+    </div>
+    {{/with}}
+    </form>
+</div>
