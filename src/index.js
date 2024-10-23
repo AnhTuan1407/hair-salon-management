@@ -9,6 +9,7 @@ const { engine } = require('express-handlebars');
 const router = require('./router/index');
 const Handlebars = require('handlebars');
 const equalHelper = require('./helpers/equal');
+const incrementHelper = require('./helpers/increment');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 
@@ -21,6 +22,7 @@ app.use(methodOverride('_method'));
 
 // Đăng ký helper 'eq' với Handlebars
 Handlebars.registerHelper('eq', equalHelper);
+Handlebars.registerHelper('increment', incrementHelper);
 
 //Middle ware
 // const userMiddleware = require('./client/user-middleware');

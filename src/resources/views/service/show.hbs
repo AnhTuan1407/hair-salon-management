@@ -1,0 +1,26 @@
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tên dịch vụ</th>
+                <th scope="col">Mô tả</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Hình ảnh</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each services}}
+            <tr>
+                <th scope="row">{{increment @index}}</th>
+                <td>{{dataValues.NAME}}</td>
+                <td>{{dataValues.DESCRIPTION}}</td>
+                <td>{{dataValues.PRICE}}</td>
+                <td><img src="data:image/jpeg;base64,{{dataValues.IMAGE}}" alt="Service Image" width="250px"
+                        height="100px">
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
