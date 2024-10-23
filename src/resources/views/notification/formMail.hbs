@@ -1,0 +1,66 @@
+<h2>FORM MAIL</h2>
+
+<div class="container mt-4">
+    <form method="POST" action="/api/notifications/sendMail">
+        <div class="mb-3">
+            <label for="subject" class="form-label">Tiêu đề</label>
+            <input type="text" class="form-control" id="subject" name="subject">
+        </div>
+
+        <div class="mb-3">
+            <label for="message" class="form-label">Nội dung</label>
+            <textarea class="form-control" id="message" name="message"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="recipients" class="form-label">Đến (Nhập email)</label>
+            <input type="text" class="form-control" id="recipients" name="recipients">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Gửi Mail</button>
+    </form>
+</div>
+
+<!-- Include jQuery and jQuery UI for Autocomplete -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<!-- Custom script for autocomplete -->
+<script>
+    $(function () {
+        // Mock email data (thay bằng fetch từ server nếu có cơ sở dữ liệu người dùng)
+        var emailList = [
+            "huynhanhtuan9@dtu.edu.vn",
+            "trandoanthu2907.203.5@gmail.com",
+            "carol@example.com",
+            "dave@example.com",
+            "eve@example.com"
+        ];
+
+        // Autocomplete cho ô nhập email
+        $("#recipients").autocomplete({
+            source: function (request, response) {
+                // Tách chuỗi và lấy phần cuối cùng để làm autocomplete
+                var term = request.term.split(/,\s*/).pop();
+                response($.ui.autocomplete.filter(emailList, term));
+            },
+            minLength: 1,
+            focus: function () {
+                // Ngăn autocomplete thay thế toàn bộ ô input khi đang chọn
+                return false;
+            },
+            select: function (event, ui) {
+                var terms = this.value.split(/,\s*/);
+                // Xóa phần cuối cùng vừa nhập (chưa hoàn chỉnh)
+                terms.pop();
+                // Thêm email được chọn từ autocomplete
+                terms.push(ui.item.value);
+                // Thêm chỗ trống sau dấu phẩy để nhập tiếp
+                terms.push("");
+                this.value = terms.join(", ");
+                return false;
+            }
+        });
+    });
+</script>

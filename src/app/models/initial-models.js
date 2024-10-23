@@ -6,6 +6,7 @@ const _ACCOUNT = require('./Account');
 const _ROLE = require('./Role');
 const _LOCATION = require('./Location');
 const _SERVICE = require('./Service');
+const _NOTIFICATION = require('./Notification');
 
 function initialModelSqlServer(sequelize) {
     const CUSTOMER = _CUSTOMER(sequelize, DataTypes);
@@ -14,6 +15,7 @@ function initialModelSqlServer(sequelize) {
     const ROLE = _ROLE(sequelize, DataTypes);
     const LOCATION = _LOCATION(sequelize, DataTypes);
     const SERVICE = _SERVICE(sequelize, DataTypes);
+    const NOTIFICATION = _NOTIFICATION(sequelize, DataTypes);
 
     return {
         CUSTOMER,
@@ -22,6 +24,7 @@ function initialModelSqlServer(sequelize) {
         ROLE,
         LOCATION,
         SERVICE,
+        NOTIFICATION
     }
 }
 
