@@ -1,0 +1,58 @@
+<h2>SCHEDULE DIVISION</h2>
+
+<div class="container mt-4">
+    <form method="POST" action="/api/schedules/division">
+        <div class="mb-3">
+            <label for="staffList" class="form-label">Tên nhân viên<span class="text-danger">(*)</span></label>
+            <input type="text" class="form-control" id="staffList" name="staffList">
+        </div>
+
+        <div class="mb-3">
+            <label for="workDate" class="form-label">Ngày làm việc <span class="text-danger">(*)</span></label>
+            <input type="date" class="form-control" id="workDate" name="workDate">
+        </div>
+
+        <div class="mb-3">
+            <label for="shiftId" class="form-label">Ca làm việc <span class="text-danger">(*)</span></label>
+
+            <select id="shiftId" name="shiftId" class="form-control">
+                <option value="" disabled selected>Chọn ca làm việc</option>
+                {{#each shiftList}}
+                <option value={{dataValues.SHIFT_ID}}>{{dataValues.NAME}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Thêm</button>
+    </form>
+</div>
+
+<!-- Include jQuery and jQuery UI for Autocomplete -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script>
+    $(function () {
+        var staffNameList = JSON.parse('{{{staffNameList}}}');
+
+        $("#staffList").autocomplete({
+            source: function (request, response) {
+                var term = request.term.split(/,\s*/).pop();
+                response($.ui.autocomplete.filter(staffNameList, term));
+            },
+            minLength: 1,
+            focus: function () {
+                return false;
+            },
+            select: function (event, ui) {
+                var terms = this.value.split(/,\s*/);
+                terms.pop();
+                terms.push(ui.item.value);
+                terms.push("");
+                this.value = terms.join(", ");
+                return false;
+            }
+        });
+    });
+</script>

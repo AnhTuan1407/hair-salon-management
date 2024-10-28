@@ -21,7 +21,26 @@ class NotificationController {
 
     //[GET] /api/notifications/showAllNotification
     async formCreateMail(req, res, next) {
-        res.render('notification/formMail');
+        const customerEmail = await models.CUSTOMER.findAll({
+            attributes: ['EMAIL'],
+        })
+
+        const staffEmail = await models.STAFF.findAll({
+            attributes: ['EMAIL'],
+        })
+
+        let emailList = [];
+        for (let item of customerEmail) {
+            emailList.push(item.dataValues.EMAIL);
+        }
+        for (let item of staffEmail) {
+            emailList.push(item.dataValues.EMAIL);
+        }
+
+        res.render('notification/formMail', {
+            title: "Gửi mail thông báo",
+            emailList: JSON.stringify(emailList),
+        });
     }
 
     //[POST] /api/notifications/sendMail

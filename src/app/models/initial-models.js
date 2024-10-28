@@ -7,6 +7,8 @@ const _ROLE = require('./Role');
 const _LOCATION = require('./Location');
 const _SERVICE = require('./Service');
 const _NOTIFICATION = require('./Notification');
+const _SCHEDULE = require('./Schedule');
+const _SHIFT = require('./Shift');
 
 function initialModelSqlServer(sequelize) {
     const CUSTOMER = _CUSTOMER(sequelize, DataTypes);
@@ -16,6 +18,8 @@ function initialModelSqlServer(sequelize) {
     const LOCATION = _LOCATION(sequelize, DataTypes);
     const SERVICE = _SERVICE(sequelize, DataTypes);
     const NOTIFICATION = _NOTIFICATION(sequelize, DataTypes);
+    const SCHEDULE = _SCHEDULE(sequelize, DataTypes);
+    const SHIFT = _SHIFT(sequelize, DataTypes);
 
     return {
         CUSTOMER,
@@ -24,7 +28,9 @@ function initialModelSqlServer(sequelize) {
         ROLE,
         LOCATION,
         SERVICE,
-        NOTIFICATION
+        NOTIFICATION,
+        SCHEDULE,
+        SHIFT,
     }
 }
 

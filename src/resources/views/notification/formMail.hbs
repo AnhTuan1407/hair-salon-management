@@ -29,14 +29,7 @@
 <!-- Custom script for autocomplete -->
 <script>
     $(function () {
-        // Mock email data (thay bằng fetch từ server nếu có cơ sở dữ liệu người dùng)
-        var emailList = [
-            "huynhanhtuan9@dtu.edu.vn",
-            "trandoanthu2907.203.5@gmail.com",
-            "carol@example.com",
-            "dave@example.com",
-            "eve@example.com"
-        ];
+        var emailList = JSON.parse('{{{emailList}}}');
 
         // Autocomplete cho ô nhập email
         $("#recipients").autocomplete({
@@ -45,7 +38,7 @@
                 var term = request.term.split(/,\s*/).pop();
                 response($.ui.autocomplete.filter(emailList, term));
             },
-            minLength: 1,
+            minLength: 3,
             focus: function () {
                 // Ngăn autocomplete thay thế toàn bộ ô input khi đang chọn
                 return false;
