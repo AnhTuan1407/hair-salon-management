@@ -1,0 +1,44 @@
+<div class="container mt-4">
+    {{#with service}}
+    <div class="container mt-5">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white text-center">
+                <h3>Chi tiết dịch vụ</h3>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-3 fw-bold">Tên dịch vụ:</div>
+                    <div class="col-md-9">{{this.NAME}}</div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-3 fw-bold">Mô tả:</div>
+                    <div class="col-md-9">{{this.DESCRIPTION}}</div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-3 fw-bold">Giá:</div>
+                    <div class="col-md-9">{{this.PRICE}} VNĐ</div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-3 fw-bold">Thời gian ước tính:</div>
+                    <div class="col-md-9">{{this.ESTIMATE_TIME}} phút</div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-3 fw-bold">Hình ảnh:</div>
+                    <div class="col-md-9">
+                        <img src="data:image/jpeg;base64,{{this.IMAGE}}" alt="Service Image" class="img-fluid rounded"
+                            style="max-width: 50%; height: auto;">
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                <a href="/api/services/findAll" class="btn btn-secondary">Quay lại</a>
+            </div>
+        </div>
+    </div>
+
+    {{/with}}
+</div>

@@ -31,7 +31,7 @@ class ServiceController {
     //[POST] /api/services/create
     async doCreate(req, res, next) {
         try {
-            const { name, description, price } = req.body;
+            const { name, description, price, estimateTime } = req.body;
             const imageFile = req.file;
 
             // Đọc file và chuyển thành base64
@@ -42,6 +42,7 @@ class ServiceController {
                 NAME: name,
                 DESCRIPTION: description,
                 PRICE: price,
+                ESTIMATE_TIME: estimateTime,
                 IMAGE: imageBase64, // Lưu chuỗi base64 vào DB
             });
 
@@ -58,12 +59,62 @@ class ServiceController {
 
     //[GET] /api/services/edit/:id
     async showEditForm(req, res, next) {
+        try {
+            const id = req.params.id;
+            const service = await models.SERVICE.findOne({
+                where: { SERVICE_ID: id },
+            })
+            console.log(service);
 
+            if (service) {
+                res.render('service/edit', {
+                    title: "Chỉnh sửa dịch vụ",
+                    service: service.dataValues,
+                })
+            } else {
+                res.status(404).json({ message: "Không tìm thấy dịch vụ" });
+            }
+
+        } catch (error) {
+            res.status(500).json({ message: "Có lỗi xảy ra!" });
+        }
     }
 
     //[PUT] /api/services/edit/:id
     async doEdit(req, res, next) {
+        try {
+            const { name, description, price, estimateTime } = req.body;
+            const id = req.params.id;
 
+            const serviceFetch = await models.SERVICE.findOne({
+                where: { SERVICE_ID: id },
+            })
+
+            let imageBase64;
+            if (req.file) {
+                const imageFile = req.file;
+                imageBase64 = fs.readFileSync(imageFile.path, { encoding: 'base64' });
+            } else {
+                imageBase64 = serviceFetch.IMAGE;
+            }
+
+            const [updatedRowsCount] = await models.SERVICE.update({
+                NAME: name,
+                DESCRIPTION: description,
+                PRICE: price,
+                ESTIMATE_TIME: estimateTime,
+                IMAGE: imageBase64,
+            }, { where: { SERVICE_ID: id } });
+
+            if (updatedRowsCount > 0) {
+                req.flash("success", `Chỉnh sửa dịch vụ thành công!`);
+                res.redirect('/api/services/findAll');
+            } else {
+                req.flash("error", `Không tìm thấy khách hàng để chỉnh sửa!`);
+            }
+        } catch (error) {
+            res.status(500).json({ message: "Có lỗi xảy ra!" });
+        }
     }
 
     //[DELETE] /api/services/delete/:id
@@ -73,7 +124,24 @@ class ServiceController {
 
     //[GET] /api/services/detail/:id
     async showDetail(req, res, next) {
+        try {
+            const id = req.params.id;
+            const service = await models.SERVICE.findOne({
+                where: { SERVICE_ID: id },
+            })
 
+            if (service) {
+                res.render('service/detail', {
+                    title: "Chi tiết dịch vụ",
+                    service: service.dataValues,
+                })
+            } else {
+                res.status(404).json({ message: "Không tìm thấy dịch vụ" });
+            }
+
+        } catch (error) {
+            res.status(500).json({ message: "Có lỗi xảy ra!" });
+        }
     }
 }
 

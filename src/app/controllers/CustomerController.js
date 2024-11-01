@@ -75,9 +75,6 @@ class CustomerController {
                 ACCOUNT_ID: customer.accountId,
             }, { where: { CUSTOMER_ID: req.params.id } });
 
-            console.log('>>>>>');
-
-
             if (updatedRowsCount > 0) {
                 req.flash("success", `Chỉnh sửa khách hàng thành công!`);
             } else {

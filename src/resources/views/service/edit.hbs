@@ -1,0 +1,110 @@
+<style>
+    .container {
+        max-width: auto;
+        margin-top: 40px;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-label {
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ced4da;
+    }
+
+    .form-control:focus {
+        border-color: #80bdff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        background-color: #007bff;
+        border-color: #007bff;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .image-preview {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #current-image {
+        border-radius: 8px;
+        margin-top: 10px;
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        object-fit: cover;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<div class="container mt-4">
+    {{#with service}}
+    <form method="POST" action="/api/services/edit/{{this.SERVICE_ID}}?_method=PUT" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="name" class="form-label">Tên dịch vụ <span class="text-danger">(*)</span></label>
+            <input type="text" class="form-control" id="name" name="name" value="{{this.NAME}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Mô tả <span class="text-danger">(*)</span></label>
+            <input type="text" class="form-control" id="description" name="description" value="{{this.DESCRIPTION}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="price" class="form-label">Giá <span class="text-danger">(*)</span></label>
+            <input type="text" class="form-control" id="price" name="price" value="{{this.PRICE}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="estimateTime" class="form-label">Thời gian ước tính (Phút) <span
+                    class="text-danger">(*)</span></label>
+            <input type="text" class="form-control" id="estimateTime" name="estimateTime"
+                value="{{this.ESTIMATE_TIME}}">
+        </div>
+
+        <div class="mb-3 image-preview">
+            <label for="image" class="form-label">Hình ảnh <span class="text-danger">(*)</span></label>
+            <img id="current-image" src="data:image/jpeg;base64,{{this.IMAGE}}" alt="Service Image">
+            <input type="file" class="form-control mt-3" id="image" name="image" accept="image/*"
+                onchange="previewImage(event)">
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Chỉnh sửa</button>
+        <a href="/api/services/findAll" class="btn btn-secondary mt-3">Quay lại</a>
+    </form>
+    {{/with}}
+</div>
+
+<script>
+    function previewImage(event) {
+        const file = event.target.files[0];
+        const preview = document.getElementById('current-image');
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+</script>

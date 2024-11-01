@@ -17,6 +17,7 @@ const and = require('./helpers/and');
 const convertToDate = require('./helpers/convertToDate');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
 
 // Sử dụng cookie-parser middleware
@@ -66,6 +67,12 @@ app.use(
 // app.use(userMiddleware.infoUser);
 
 app.use(express.json());
+
+// Middleware để parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Middleware để parse application/json
+app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 

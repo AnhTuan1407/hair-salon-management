@@ -17,6 +17,9 @@ module.exports = function (sequelize, Datatypes) {
         IMAGE: {
             type: Datatypes.TEXT,
         },
+        ESTIMATE_TIME: {
+            type: Datatypes.FLOAT,
+        },
     }, {
         tableName: "SERVICE",
         schema: 'dbo',
