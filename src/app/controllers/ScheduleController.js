@@ -2,6 +2,8 @@ const { where } = require('sequelize');
 const db = require('../models/index');
 const initialModels = require('../models/initial-models');
 const models = initialModels(db);
+const { Op } = require("sequelize");
+
 
 class ScheduleController {
 
@@ -15,14 +17,84 @@ class ScheduleController {
         }
     }
 
-    //[GET] /api/schedules/staff/:id
+    //[GET] /api/schedules/staff/:id/:date
     async findScheduleByStaffId(req, res, next) {
         try {
-            const schedule = await models.SCHEDULE.findOne({
-                where: { STAFF_ID: req.params.id },
-            })
+            const { id, date } = req.params;
 
-            res.json(schedule);
+            // Xác định ngày bắt đầu và kết thúc của tuần
+            const currentDate = new Date(date);
+            const dayOfWeek = currentDate.getDay();
+            const startOfWeek = new Date(date);
+            startOfWeek.setDate(currentDate.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1));
+
+            const endOfWeek = new Date(startOfWeek);
+            endOfWeek.setDate(startOfWeek.getDate() + 6);
+
+            const nextWeek = new Date(endOfWeek);
+            nextWeek.setDate(endOfWeek.getDate() + 1);
+            const previousWeek = new Date(startOfWeek);
+            previousWeek.setDate(startOfWeek.getDate() - 6);
+
+            let weekMap = new Map();
+            for (let i = 2; i < 9; i++) {
+                const day = new Date(startOfWeek);
+                day.setDate(startOfWeek.getDate() + (i - 2));
+                if (i == 8) {
+                    weekMap.set("Chủ nhật", day.getDate());
+                } else {
+                    weekMap.set("Thứ " + (i), day.getDate());
+                }
+            }
+
+            const weekArray = Array.from(weekMap, ([key, value]) => ({ key, value }));
+            console.log(weekArray);
+
+            const hours = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+
+            const scheduleFetch = await models.SCHEDULE.findAll({
+                where: {
+                    STAFF_ID: id,
+                    WORK_DATE: {
+                        [Op.between]: [startOfWeek, endOfWeek],
+                    }
+                }
+            });
+
+            const scheduleList = [];
+
+            for (let item of scheduleFetch) {
+                let shift = await models.SHIFT.findOne({
+                    where: { SHIFT_ID: item.dataValues.SHIFT_ID },
+                });
+
+                let objSchedule = {
+                    SCHEDULE_ID: item.dataValues.SCHEDULE_ID,
+                    STAFF_ID: item.dataValues.STAFF_ID,
+                    WORK_DATE: item.dataValues.WORK_DATE,
+                    SHIFT: shift.dataValues.NAME,
+                    START_TIME: shift.dataValues.START_TIME,
+                    END_TIME: shift.dataValues.END_TIME,
+                }
+
+                scheduleList.push(objSchedule);
+            }
+
+            console.log('>>>>> Schedule list: ', scheduleList);
+
+
+            res.render('schedule/detail', {
+                title: 'Lịch trình nhân viên',
+                scheduleList: scheduleList,
+                nextWeek: nextWeek,
+                previousWeek: previousWeek,
+                startOfWeek: startOfWeek,
+                endOfWeek: endOfWeek,
+                weekArray: weekArray,
+                hours: hours,
+                staffId: id,
+            });
+
         } catch (error) {
             res.status(500).json({ message: "Có lỗi xảy ra!" });
         }

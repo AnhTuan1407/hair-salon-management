@@ -10,6 +10,11 @@ const router = require('./router/index');
 const Handlebars = require('handlebars');
 const equalHelper = require('./helpers/equal');
 const incrementHelper = require('./helpers/increment');
+const formatPeriod = require('./helpers/formatPeriod');
+const withinHour = require('./helpers/withinHour');
+const calculateBox = require('./helpers/calculateBox');
+const and = require('./helpers/and');
+const convertToDate = require('./helpers/convertToDate');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 
@@ -23,6 +28,15 @@ app.use(methodOverride('_method'));
 // Đăng ký helper 'eq' với Handlebars
 Handlebars.registerHelper('eq', equalHelper);
 Handlebars.registerHelper('increment', incrementHelper);
+Handlebars.registerHelper('formatPeriod', formatPeriod.formatPeriod);
+Handlebars.registerHelper('withinHour', withinHour);
+Handlebars.registerHelper('and', and);
+Handlebars.registerHelper('calculateTop', calculateBox.top);
+Handlebars.registerHelper('calculateHeight', calculateBox.height);
+Handlebars.registerHelper('convertByDay', convertToDate.convertByDay);
+Handlebars.registerHelper('convertDateToObj', convertToDate.convertDateToObj);
+Handlebars.registerHelper('getDate', convertToDate.getDate);
+Handlebars.registerHelper('formatDate', convertToDate.formatDate);
 
 //Middle ware
 // const userMiddleware = require('./client/user-middleware');

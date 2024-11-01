@@ -1,1 +1,56 @@
-<h2>SCHEDULE</h2>
+<h2>Lịch làm việc của nhân viên</h2>
+<style>
+    .schedule-box {
+        background-color: lightblue;
+        height: 40px;
+        position: relative;
+        margin-bottom: 5px;
+    }
+</style>
+<div class="container">
+    <a href="/api/schedules/staff/{{staffId}}/{{formatDate previousWeek}}" role="button" class="btn btn-primary">Tuần
+        trước</a>
+    <a href="/api/schedules/staff/{{staffId}}/{{formatDate nextWeek}}" role="button" class="btn btn-primary">Tuần
+        sau</a>
+
+    <span>{{formatDate startOfWeek}}</span>
+    <span>-</span>
+    <span>{{formatDate endOfWeek}}</span>
+
+    <div class="calendar">
+        <table class="table" style="border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr>
+                    <th scope="col" style="border: 1px solid black; padding: 8px;">Giờ</th>
+                    {{#each weekArray}}
+                    <th scope="col" style="border: 1px solid black; padding: 8px;">{{this.key}},
+                        <span>{{this.value}}</span>
+                    </th>
+                    {{/each}}
+                </tr>
+            </thead>
+            <tbody>
+                {{#each hours}}
+                <tr>
+                    <th scope="row" style="height: 100px; border: 1px solid black; padding: 8px;">
+                        {{this}}<sup>{{formatPeriod this}}</sup>
+                    </th>
+                    {{#each ../weekArray}}
+                    <td style="border: 1px solid black; padding: 8px; position: relative;">
+                        {{#each ../../scheduleList}}
+                        {{#if (eq (getDate (convertDateToObj this.WORK_DATE)) ../this.value)}}
+                        <div class="schedule-box" style="position: absolute; width: 90%; ">
+                            {{this.SHIFT}}
+                        </div>
+
+                        {{/if}}
+                        {{/each}}
+                    </td>
+                    {{/each}}
+                </tr>
+                {{/each}}
+
+            </tbody>
+        </table>
+    </div>
+</div>
