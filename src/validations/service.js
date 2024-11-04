@@ -29,6 +29,18 @@ module.exports.createValidation = (req, res, next) => {
         return;
     }
 
+    if (isNaN(req.body.price)) {
+        req.flash("error", `Giá dịch vụ phải là số!`);
+        res.redirect("back");
+        return;
+    }
+
+    if (isNaN(req.body.estimateTime)) {
+        req.flash("error", `Số giờ dịch vụ phải là số!`);
+        res.redirect("back");
+        return;
+    }
+
     next();
 }
 

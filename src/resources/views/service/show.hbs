@@ -77,6 +77,7 @@
 </style>
 
 <div class="container">
+    <a href="/api/services/create" class="btn btn-success">Thêm mới dịch vụ</a>
     <table class="table">
         <thead>
             <tr>
@@ -91,7 +92,7 @@
         </thead>
         <tbody>
             {{#each services}}
-            <tr onclick="showDetail('{{dataValues.SERVICE_ID}}')" style="cursor: pointer;">
+            <tr style="cursor: pointer;">
                 <th scope="row">{{increment @index}}</th>
                 <td>{{dataValues.NAME}}</td>
                 <td>{{dataValues.DESCRIPTION}}</td>
@@ -103,17 +104,65 @@
                 <td>
                     <a href="/api/services/edit/{{dataValues.SERVICE_ID}}" role="button" class="btn btn-primary">Chỉnh
                         sửa</a>
-                    <a href="/api/services/delete/{{dataValues.SERVICE_ID}}" role="button"
-                        class="btn btn-danger">Xóa</a>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                        data-name="{{dataValues.NAME}}" data-id="{{dataValues.SERVICE_ID}}">
+                        Xóa
+                    </button>
                 </td>
             </tr>
+
             {{/each}}
         </tbody>
     </table>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-danger" id="deleteModalLabel">Xóa dịch vụ</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn xóa dịch vụ này không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-danger" id="btn-delete-service">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form id="delete-service-form" method="POST"></form>
+
+
 <script>
     function showDetail(serviceId) {
         window.location.href = `/api/services/detail/${serviceId}`;
     }
+
+    //Script xử lý confirm modal
+    document.addEventListener('DOMContentLoaded', function (event) {
+        let serviceId;
+        let serviceName;
+        let deleteForm = document.forms['delete-service-form'];
+        let deleteModalLabel = document.getElementById('deleteModalLabel');
+        let btnDeleteService = document.getElementById('btn-delete-service');
+
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            let button = $(event.relatedTarget);
+            serviceId = button.data('id');
+            serviceName = button.data('name');
+            var modal = $(this);
+            modal.find('.modal-title').text("Xóa dịch vụ " + serviceName);
+        });
+
+        btnDeleteService.onclick = function () {
+            deleteForm.action = '/api/services/delete/' + serviceId + '?_method=DELETE';
+            deleteForm.submit();
+        }
+    });
 </script>

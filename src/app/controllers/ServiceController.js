@@ -48,7 +48,7 @@ class ServiceController {
 
             // Xóa file tạm sau khi đã chuyển đổi
             fs.unlinkSync(imageFile.path);
-
+            req.flash('success', `Thêm dịch vụ thành công!`);
             res.redirect('/api/services/findAll');
         } catch (error) {
             console.log(error);
@@ -117,11 +117,6 @@ class ServiceController {
         }
     }
 
-    //[DELETE] /api/services/delete/:id
-    async doDelete(req, res, next) {
-
-    }
-
     //[GET] /api/services/detail/:id
     async showDetail(req, res, next) {
         try {
@@ -139,6 +134,28 @@ class ServiceController {
                 res.status(404).json({ message: "Không tìm thấy dịch vụ" });
             }
 
+        } catch (error) {
+            res.status(500).json({ message: "Có lỗi xảy ra!" });
+        }
+    }
+
+    //[DELETE] /api/services/delete/:id
+    async doDelete(req, res, next) {
+        try {
+            const id = req.params.id;
+            const service = await models.SERVICE.findOne({
+                where: { SERVICE_ID: id },
+            });
+            if (service) {
+                await models.SERVICE.destroy({
+                    where: { SERVICE_ID: id },
+                });
+                req.flash('success', 'Xóa dịch vụ thành công!');
+                res.redirect('/api/services/findAll');
+            } else {
+                req.flash('error', `Không tìm thấy dịch vụ này!`);
+                res.redirect('/api/services/findAll');
+            }
         } catch (error) {
             res.status(500).json({ message: "Có lỗi xảy ra!" });
         }
