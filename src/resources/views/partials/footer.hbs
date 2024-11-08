@@ -1,15 +1,236 @@
-<div class="footer mt-4">
-    <div class="card text-center">
-        <div class="card-header">
-            Featured
+<style>
+    .footer {
+        font-size: 13px;
+    }
+
+    .footer-container {
+        background-color: #15397f;
+        padding-top: 40px;
+        padding-bottom: 20px;
+        display: flex;
+        gap: 20px;
+        justify-content: space-around;
+    }
+
+    .footer-container a {
+        color: white;
+        text-decoration: none;
+        text-decoration-color: white;
+        transition: color 0.3s;
+    }
+
+    .footer-container a:hover {
+        color: #ffa500;
+    }
+
+    .footer-container ul li {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer-copyright {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 0.75rem;
+        text-align: center
+    }
+
+    .footer-links-1 a,
+    .footer-links-2 a,
+    .footer-links-3 a {
+        text-decoration: none;
+        text-decoration-color: white;
+        flex-direction: row;
+        display: flex;
+        margin-bottom: 15px;
+    }
+
+    .footer-links-1,
+    .footer-links-2,
+    .footer-links-3 {}
+
+    .footer-links-1 {
+        max-width: 148px;
+    }
+
+    .footer-links-2 {
+        max-width: 300px;
+    }
+
+    .footer-links-3 {
+        max-width: 275px;
+    }
+
+    .application-download {
+        color: white;
+        max-width: 136px;
+    }
+
+    .application-download>div {
+        display: flex;
+        align-items: center;
+    }
+
+    .application-download>div>div {
+        display: flex;
+        flex-direction: column;
+        margin-right: 10px;
+    }
+
+    .application-download a {
+        width: 60px;
+        height: 20px;
+        margin-bottom: 5px;
+    }
+
+    .application-download .btn-app-store,
+    .application-download .btn-gg-play {
+        width: 100%;
+        height: 100%;
+    }
+
+    .qr-code {
+        width: 48px;
+        height: 48px;
+    }
+
+    .info-social-media {
+        color: white;
+        display: flex;
+        gap: 10px;
+        max-width: 275px;
+        flex-direction: column;
+    }
+
+    .info-social-media>div {
+        display: flex;
+        gap: 8px;
+    }
+
+    .tiktok a {
+        display: flex;
+        align-items: center;
+    }
+
+    .tiktok img {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+    }
+
+    .tiktok div {
+        font-size: 11px;
+    }
+
+    .youtube a {
+        display: flex;
+        align-items: center;
+    }
+
+    .youtube img {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+    }
+
+    .youtube div {
+        font-size: 11px;
+    }
+
+    .facebook a {
+        display: flex;
+        align-items: center;
+    }
+
+    .facebook img {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+    }
+
+    .facebook div {
+        font-size: 11px;
+    }
+</style>
+
+<div class="footer">
+    <div class="footer-container">
+        <div class="footer-links-1">
+            <ul>
+                <li><a href="#">Về chúng tôi</a></li>
+                <li><a href="#">Học cắt tóc</a></li>
+                <li><a href="#">Tìm SmSa gần nhất</a></li>
+                <li><a href="#">Terms of Service</a></li>
+            </ul>
         </div>
-        <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+        <div class="footer-links-2">
+            <ul>
+                <li><a href="#">Hotline (1000đ/phút): 1900.27.27.03</a></li>
+                <li><a href="#">Liên hệ học nghề tóc: 0967.86.3030</a></li>
+                <li><a href="#">Liên hệ nhượng quyền</a></li>
+                <li><a href="#">Liên hệ quảng cáo</a></li>
+            </ul>
         </div>
-        <div class="card-footer text-body-secondary">
-            2 days ago
+        <div class="footer-links-3">
+            <ul>
+                <li><a href="#">Giờ phục vụ: Thứ 2 đến Chủ Nhật, 7h00 - 17h00</a></li>
+                <li><a href="#">Chính sách bảo mật</a></li>
+                <li><a href="#">Điều kiện giao dịch chung</a></li>
+                <li><a href="#">Giấy phép giáo dục nghề nghiệp</a></li>
+            </ul>
         </div>
+
+        <div class="application-download">
+            <p>Tải ứng dụng SmSa</p>
+
+            <div>
+                <div>
+                    <a href="#"><img src="https://30shine.com/footer_apple.png" alt="Loading..."
+                            class="btn-app-store"></a>
+                    <a href="#"><img src="https://30shine.com/footer_googleplay.png" alt="Loading..."
+                            class="btn-gg-play"></a>
+                </div>
+                <img src="https://30shine.com/download-app-qr.png" alt="Loading..." class="qr-code">
+            </div>
+        </div>
+
+        <div class="info-social-media">
+            <p>Tham gia cộng đồng 2,5 triệu thành viên</p>
+
+            <div>
+                <div class="tiktok">
+                    <a href="#">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAE9SURBVHgBhVLBSsNAFBwLRfRgcvDiwWQ9qzVnT/kD7RfYP2gQBKVI8we1J0GUgCAe61URijcPQos/sB5E0IMbFBX08NxNszQJ2XZgSNh9M++9YYE8fMlIkkuSpJDsS+5gAtppsYkDSTZdZFkEZ7lMbGsRK+vAWvvE3z/It93iXaiFkUmoMOhdE9uoZe/U3qikgYxhWcD62ug//gLzVsG7F3KseV2hRvUquYUP9tB+e4HY7cDFXCIMVjZR364jxl/WPtlT6DCCn08S4Tk17Rp5rUMi/ko+FssS9lXH4WjEBWxVZ3E3fEA3fgTcpaSjAYmmoZ3C2xsS/JmaZ6fU+f0mCi/JRrXYLco69NWh7Tp0dXRC1LsnERxTA05RxFF4BAzjZ2aiysIzzR6WGIh0PJYtnDEYKGcVeSz5lH5z+AeSZqYS7MNhVAAAAABJRU5ErkJggg=="
+                            alt="Loading...">
+                        <div>600k follow</div>
+                    </a>
+                </div>
+                <div class="youtube">
+                    <a href="#">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADQSURBVHgBlZLBDYJAEEVnLYDQAIQO4M6FDrQDW/DEmRJMaMAStAIrALUAggUY0URPRta/CsRMBpRJXggsb3f/7CpipYlmeExBAC7gCDaKaE1SQfBACXQPZsyTpGpAkuUfK3G2XaYRUks0gRvxvFWeU+26NFCBEX3+9ek4dM4yuqVp3wT+pGm5WI8wfE8i1NVkTHiGU1Hoexzr2rL6Ms6NGPCBAaHFazu7HNHRpNswXmyw+0Naic1o8paCYG7V4vtfJcg2fc7WXPIKHMBese6/AJ5c5fBdVu6hAAAAAElFTkSuQmCC"
+                            alt="Loading...">
+                        <div>1300k follow</div>
+                    </a>
+                </div>
+                <div class="facebook">
+                    <a href="#">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAFrSURBVHgBjVKxTgJBEJ1ZDoWoHFQCiQnUkEhvgwmFjTH+gImFrSHRgJV6VmA06hfAJ5DYmEgitRWVNYmFWB1ggai34+7iHXceEqe425l5b97M7iBMsfiRmUcKrhJaMc55mzFodyuxjhuDPgLXrggp5y/H6oCfhl3AIcZLbyeAdAqzrQNorUsy+1FKTSMdFObhsbwI9/sLkE0GZCgFFHiQB00hSKuJj4e0txaEw8KcM08k5KRSy6V+UVNqRPnfahuZoPpfNj/gojny5BDZFlPyM+zZ5L4YAeWYX0lTc2WT49TZ5njOldgEKlqPapYFvYCLrodQgCavFBG+nM+tjIBthUiUB6a4mqgN1MMItZ0wZBIMjm9HcPf05W0Zoa60OJFhxwbvpED9IXl8V5s9AMtQxNdz/ZoAG/APkyLOAihydWkbgW7+IiglhF0pIn3Prb5U9aJYqbQsgAgtEWpZnBpiq4xh2Ep3K5G6jf0GwmuH490nLbMAAAAASUVORK5CYII="
+                            alt="Loading...">
+                        <div>200k follow</div>
+                    </a>
+                </div>
+            </div>
+            <div>
+                    <a href="#"><img src="https://30shine.com/static/media/footer_congthuongicon.f3d3b02c.png"
+                            alt="Loading..." style="width: 68px; height: 28px;"></a>
+                    <a href="#"><img src="https://30shine.com/footer_dmca.png" alt="Loading..." style="width: 48px; height: 28px;"></a>
+                </div> 
+        </div>
+    </div>
+
+    <div class="footer-copyright">
+        © 2015 Công Ty Cổ Phần TMDV 30Shine / Địa chỉ: 82 Trần Đại Nghĩa, P. Đồng Tâm, Q. Hai Bà Trưng, HN/ GPĐKKD số
+        010.7467.693 do Sở KHĐT TP.HN cấp ngày 08/06/2016.
     </div>
 </div>
