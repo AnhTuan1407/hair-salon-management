@@ -1,58 +1,122 @@
 <style>
-    .container-fluid {
+    #wrapper {
+        background-color: #fff;
+        box-shadow: 0 2px 8px hsla(0, 0%, 77.6%, .25);
+        border-bottom: 1px solid hsla(0, 0%, 93.3%, .7);
+        font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+        font-weight: 400;
+        position: relative;
+    }
+
+    .header-container {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .header-container a {
+        text-decoration: none;
+        color: #15397f;
+    }
+
+    .nav-bar-menu a:hover {
+        border-bottom: 2px solid #a0c9eb;
+    }
+
+    .nav-bar-menu {
+        display: flex;
+    }
+
+    .link-item-1,
+    .link-item-2,
+    .link-item-3,
+    .link-item-4,
+    .link-item-5,
+    .link-item-6 {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .auth-menu {
+        display: flex;
+    }
+
+    .auth-menu a:hover {
+        border-bottom: 2px solid #a0c9eb;
+    }
+
+    .auth-item-1,
+    .auth-item-2,
+    .auth-item-3 {
+        padding: 20px;
+    }
+
+    .img-logo {
+        width: 120px;
+    }
+
+    .avt-user {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        right: 10px;
+        top: 60px;
+        display: none;
         background-color: white;
-    }
-
-    .navbar-item {
-        display: inline;
-        list-style: none;
-    }
-
-    .navbar-item a {
-        display: block;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
         padding: 10px;
-        background-color: white;
     }
 
-    .navbar-item a:hover {
-        text-decoration: underline;
-        text-decoration-color: blue;
-        text-underline-offset: 10px;
+    .dropdown-menu a {
+        display: block;
+        padding: 5px 10px;
+        text-decoration: none;
+        color: #333;
+    }
+
+    .dropdown-menu a:hover {
+        background-color: #f8f8f8;
     }
 </style>
 
-<div class="header">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/api/site/home">SmSa</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="navbar-item">
-                        <a class="dropdown-item" href="/api/site/home">Trang chủ</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a class="dropdown-item" href="/api/site/about-us">Về SmSa</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a class="dropdown-item" href="/api/site/map">Tìm SmSa gần nhất</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a class="dropdown-item" href="/api/accounts/register">Đăng ký</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a class="dropdown-item" href="/api/accounts/login">Đăng nhập</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a class="dropdown-item" href="/api/accounts/logout">Đăng xuất</a>
-                    </li>
-                </ul>
+<div id="wrapper">
+    <div class="header-container">
+        <div class="logo"><a href="/api/site/home"><img class="img-logo" src="/images/logo_30shine_new.7135aeb8.png"
+                    alt="Loading..."></a></div>
+        <div class="nav-bar-menu">
+            <div class="link-item-1"><a href="/api/site/home">Trang chủ</a></div>
+            <div class="link-item-2"><a href="/api/site/about-us">Về SmSa</a></div>
+            <div class="link-item-3"><a href="/api/site/map">Tìm SmSa gần nhất</a></div>
+            <div class="link-item-4"><a href="">Học cắt tóc</a></div>
+            <div class="link-item-5"><a href="">Nhượng quyền</a></div>
+            <div class="link-item-6"><a href="">Đối tác</a></div>
+        </div>
+        <div class="auth-menu">
+            <div class="auth-item-1"><a href="/api/accounts/register">Đăng ký</a></div>
+            <div class="auth-item-2"><a href="/api/accounts/login">Đăng nhập</a></div>
+            <div class="auth-item-3"><a href="/api/accounts/logout">Đăng xuất</a></div>
+            <div class="user-info" onclick="toggleDropdown()"><img src="/images/user-avatar-reloaded.png" alt="Loading"
+                    class="avt-user">
+            </div>
+
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="/api/customer/detail/{{idPerson}}">Trang cá nhân</a>
+                <a href="#">Thay đổi mật khẩu</a>
+                <a href="#">Đặt lịch cắt tóc</a>
+                <a href="/api/accounts/logout">Đăng xuất</a>
             </div>
         </div>
-    </nav>
+    </div>
 </div>
 
 <script>
@@ -64,4 +128,33 @@
         }
         return false;
     }
+
+    function toggleDropdown() {
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        dropdownMenu.style.display = dropdownMenu.style.display === 'none' || dropdownMenu.style.display === '' ? 'block' : 'none';
+    }
+
+    document.addEventListener('click', function (event) {
+        const isClickInside = document.querySelector('.user-avatar').contains(event.target);
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        if (!isClickInside && dropdownMenu.style.display === 'block') {
+            dropdownMenu.style.display = 'none';
+        }
+    });
+
+    // Kiểm tra trạng thái đăng nhập từ phía client
+    document.addEventListener('DOMContentLoaded', () => {
+        const token = document.cookie.split('; ').find(row => row.startsWith('tokenUser='));
+        if (token) {
+            document.querySelector('.auth-item-2').style.display = 'none';
+            document.querySelector('.auth-item-1').style.display = 'none';
+            document.querySelector('.user-info').style.display = 'flex';
+            document.querySelector('.auth-item-3').style.display = 'flex';
+        } else {
+            document.querySelector('.auth-item-2').style.display = 'flex';
+            document.querySelector('.auth-item-1').style.display = 'flex';
+            document.querySelector('.user-info').style.display = 'none';
+            document.querySelector('.auth-item-3').style.display = 'none';
+        }
+    });
 </script>

@@ -15,10 +15,14 @@ const withinHour = require('./helpers/withinHour');
 const calculateBox = require('./helpers/calculateBox');
 const and = require('./helpers/and');
 const convertToDate = require('./helpers/convertToDate');
+const checkLogin = require('./helpers/checkLogin');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const checkAuth = require('./client/check-auth-middleware');
 
+
+app.use(checkAuth);
 
 // Sử dụng cookie-parser middleware
 app.use(cookieParser());
@@ -38,6 +42,7 @@ Handlebars.registerHelper('convertByDay', convertToDate.convertByDay);
 Handlebars.registerHelper('convertDateToObj', convertToDate.convertDateToObj);
 Handlebars.registerHelper('getDate', convertToDate.getDate);
 Handlebars.registerHelper('formatDate', convertToDate.formatDate);
+Handlebars.registerHelper('checkLogin', checkLogin.isLoggedIn);
 
 //Middle ware
 // const userMiddleware = require('./client/user-middleware');

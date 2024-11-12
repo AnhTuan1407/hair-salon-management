@@ -4,11 +4,10 @@ const jwt = require('jsonwebtoken');
 
 const db = require('../models/index');
 const initialModelSqlServer = require('../models/initial-models');
-const { where } = require('sequelize');
 const models = initialModelSqlServer(db);
 
 const { getAllAccounts } = require('../services/accountService');
-
+const checkLogin = require('../../helpers/checkLogin');
 async function hashPasswordBcrypt(password) {
     const saltRounds = 5; // Độ mạnh của salt
     const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -112,9 +111,29 @@ class AccountController {
             res.cookie('tokenUser', token);
             console.log('>>> Token: ', token);
 
-            // Trả về phản hồi
-            res.json({ message: 'Login successful', token });
-            return;
+            const decodedToken = jwt.verify(token, 'secret_key');
+            // localStorage.setItem('tokenUser', )
+            console.log('decodedToken: ', decodedToken);
+
+
+            if (account.USERNAME == "admin") {
+                req.flash("Đăng nhập thành công!");
+                res.render('site/dashboard', {
+                    title: "Dashboard",
+                    role: decodedToken.role,
+                });
+                return;
+            } else {
+                req.flash("Đăng nhập thành công!");
+                res.render('site/home', {
+                    title: "Trang chủ",
+                    checkLogin: checkLogin,
+                    role: decodedToken.role,
+                    idPerson: decodedToken.idPerson,
+                    account: account,
+                });
+                return;
+            }
         }
 
         req.flash("error", `Không có username này!`);
